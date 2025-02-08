@@ -1,0 +1,162 @@
+/* Background Styling */
+.frontpage-container {
+  min-height: 100vh;
+  background: linear-gradient(to bottom right, #0a0024, #240046, #0a0024);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem;
+  position: relative;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Header Styling */
+.frontpage-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #a855f7;
+  letter-spacing: 2px;
+}
+
+.navbar {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 0.8rem 1.5rem;
+  border-radius: 12px;
+  display: flex;
+  gap: 1.5rem;
+  box-shadow: 0px 4px 12px rgba(168, 85, 247, 0.2);
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #d1d5db;
+  transition: 0.3s;
+  font-weight: 500;
+}
+
+.navbar a:hover {
+  color: #a855f7;
+}
+
+/* Main Content */
+.main-content {
+  text-align: center;
+  margin-top: 5rem;
+}
+
+.main-title {
+  font-size: 3rem;
+  font-family: "Fira code", monospace;
+  font-weight: 800;
+  color: #c084fc;
+  text-shadow: 0px 0px 15px rgba(168, 85, 247, 0.8);
+  animation: fadeInUp 1s ease-out forwards;
+  position: relative;
+}
+
+.rocket-emoji {
+  display: inline-block;
+  font-size: 2rem;
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Hover Animation for rocket emoji flying at 130-degree angle */
+.rocket-emoji:hover {
+  animation: rocket-fly-up 3s linear forwards; /* Trigger the flying-up animation on hover */
+}
+
+/* Animation for rocket emoji flying at a 130-degree angle */
+@keyframes rocket-fly-up {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(200px, -400px) rotate(130deg); /* Adjust to fly at a 130-degree angle */
+  }
+}
+
+/* Left-aligned Message Animation */
+.main-description {
+  font-size: 1.2rem;
+  font-family: "Fira code", monospace;
+  margin-top: 1rem;
+  max-width: 600px;
+  color: #a392bb; /* Lighter color to match theme */
+  line-height: 1.6;
+  font-weight: 400;
+  opacity: 0;
+  animation: fadeIn 1.5s ease-out forwards;
+  transform: translateY(50px);
+  animation-delay: 1s;
+}
+
+/* Fade-in effect for message */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+}
+/* Dashboard Button */
+.dashboard-btn {
+  margin-top: 1.5rem;
+  padding: 0.8rem 1.8rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  background: #a855f7;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0px 4px 12px rgba(168, 85, 247, 0.4);
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.dashboard-btn:hover {
+  background: #9333ea;
+  transform: scale(1.05);
+}
+
+/* Login Button */
+.login-btn {
+  padding: 0.8rem 1.8rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  background: linear-gradient(45deg, #a855f7, #9333ea);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0px 4px 12px rgba(168, 85, 247, 0.4);
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.login-btn:hover {
+  background: linear-gradient(45deg, #9333ea, #a855f7);
+  transform: scale(1.05);
+}
+
+/* Footer */
+.frontpage-footer {
+  width: 100%;
+  text-align: center;
+  padding: 1rem;
+  border-top: 1px solid rgba(168, 85, 247, 0.5);
+  color: #d1d5db;
+  font-size: 0.9rem;
+}
