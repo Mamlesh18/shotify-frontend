@@ -1,68 +1,202 @@
-.login-form-center {
+/* Login.css */
+
+/* Background Styling */
+.login-container {
+  min-height: 100vh;
+  background: linear-gradient(to bottom right, #0a0024, #160038, #0a0024);
+  color: white;
+  display: flex;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Left Section - Login Details */
+.login-section {
+  width: 40%;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* Logo */
+.logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #a855f7;
+  letter-spacing: 2px;
+  margin-bottom: 2rem;
+}
+
+/* Welcome Message */
+.welcome-message {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+/* Input Group */
+.input-group {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.fade-in {
+    animation: fadeIn 0.6s ease-in-out;
+    margin-top: 20px; 
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+.input-field {
+  width: 100%;
+  padding: 0.8rem;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  border-radius: 8px;
+  color: #d1d5db;
+  outline: none;
+  transition: border-color 0.3s ease-in-out;
+}
+
+.input-field::placeholder {
+  color: #a392bb;
+}
+
+.input-field:focus {
+  border-color: #a855f7;
+}
+
+/* Buttons */
+.continue-btn,
+.login-btn {
+  width: 100%;
+  padding: 0.8rem;
+  font-size: 1rem;
+  font-weight: bold;
+  background: #a855f7;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.continue-btn:hover,
+.login-btn:hover {
+  background: #9333ea;
+  transform: scale(1.02);
+}
+
+/* Resend Option */
+.resend-option {
+  font-size: 0.9rem;
+  color: #a392bb;
+  text-align: center;
+}
+
+.resend-option span {
+  color: #a855f7;
+  cursor: pointer;
+  text-decoration: underline;
+  margin-left: 5px;
+}
+
+.resend-option span:hover {
+    color: #9333ea;
+  }
+
+/* Sign Up Option */
+.signup-option {
+  font-size: 0.9rem;
+  color: #a392bb;
+  margin-top: 1.5rem;
+}
+
+.signup-option span {
+  color: #a855f7;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+/* Right Section - Product Information */
+.product-section {
+  width: 60%;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.product-title {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.product-description {
+  font-size: 1rem;
+  color: #a392bb;
+  line-height: 1.6;
+}
+
+/* OR Divider */
+.or-divider {
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+    font-size: 14px;
+    color: #a392bb;
+    font-weight: 600;
+  }
+  
+  .or-divider::before,
+  .or-divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: rgba(168, 85, 247, 0.3);
+    margin: 0 10px;
+  }
+  
+  /* Styled Google Auth Button */
+  .google-auth-btn {
+    width: 100%;
+    padding: 0.8rem;
+    font-size: 1rem;
+    font-weight: bold;
+    background: #421d65; /* Matching Theme Color */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
     align-items: center;
     justify-content: center;
-    height: 928px;
-    background-color: #181818;
-    height: 100vh;
+    gap: 10px;
+    transition: all 0.3s ease-in-out;
   }
   
-  .login-form-center div {
-    margin-bottom: 15px;
-    width: 250px; /* Ensure the container width is consistent */
-
+  .google-auth-btn:hover {
+    background: #9333ea; /* Darker Shade on Hover */
+    transform: scale(1.02);
   }
   
-  .login-form-center label {
-    font-size: 1rem;
-    color: black;
-    font-weight: bold;
-    display: block; /* Ensures the label is aligned correctly above the input */
-    margin-bottom: 5px; /* Adds space between label and input */
-  }
-  
-  .login-form-center input {
-    width: 100%; /* Ensure input fields fill the container */
-    padding: 10px;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    color: black; /* Added this line to change the text color */
-
-  }
-  
-  .login-form-center button {
-    background-color: #6a0dad;
-    color: #ffffff;
-    font-size: 1rem;
-    font-weight: bold;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    width: 10%; /* Ensures the button is the same width as the input fields */
-    margin-top: 15px; /* Adds space above the button */
-  }
-  
-  .login-form-center button:hover {
-    background-color: #21a1f1;
-  }
-  
-  .login-form-center p {
-    color: white;
-    font-size: 0.9rem;
-    font-weight: bold;
-    margin-top: 10px; /* Adds space above the paragraph */
-
-  }
-  
-  .login-form-center a {
-    color: #6a0dad;
-    text-decoration: none;
-  }
-  
-  .login-form-center a:hover {
-    text-decoration: underline;
+  .google-logo {
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: 50%;
+    padding: 2px;
   }
   

@@ -19,17 +19,15 @@ export default function Frontpage() {
       <header className="frontpage-header">
         <div className="logo">ReelMaker</div>
         <div className="navbar">
-          <a href="#pricing">Pricing</a>
-          <a href="#about">About Us</a>
-          <a href="#features">Features</a>
-          <a href="#support">Support</a>
+          <a href="/about">About Us</a>
+    
         </div>
         <motion.button
           onClick={() => navigate("/login")}
           initial={{ opacity: 0, x: 100 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1 }}
-          className="login-btn"
+          className="login-btn-1"
         >
           Log In
         </motion.button>

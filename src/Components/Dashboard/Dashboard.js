@@ -6,60 +6,87 @@ export default function Dashboard() {
   const [prompt, setPrompt] = useState("");
   const [loading, setLoading] = useState(false);
   const [videoUrl, setVideoUrl] = useState(null);
+  const [isPromptMinimized, setIsPromptMinimized] = useState(false);
 
   const handleGenerate = async () => {
     setLoading(true);
+    setIsPromptMinimized(true); // Minimize the prompt area
     try {
-      const response = await axios.post("http://localhost:5000/generate-video", { prompt });
-      setVideoUrl(response.data.videoUrl);
+      const response = await axios.post(
+        "http://localhost:5001/v1/shortsgenerator/query",
+        { prompt },
+        {
+          headers: {
+            Email: "mamlesh123@gmail.com",
+          },
+          responseType: "blob", // Expect a video file
+        }
+      );
+
+      // Convert the Blob response into a URL to display in the video element
+      const videoBlob = new Blob([response.data], { type: "video/mp4" });
+      const videoObjectURL = URL.createObjectURL(videoBlob);
+      setVideoUrl(videoObjectURL);
     } catch (error) {
       console.error("Error generating video:", error);
     }
     setLoading(false);
   };
 
-  const handleDownload = async () => {
-    try {
-      const response = await axios.get("http://localhost:5000/download-video", {
-        params: { videoUrl },
-        responseType: "blob",
-      });
-      const url = window.URL.createObjectURL(new Blob([response.data]));
-      const link = document.createElement("a");
-      link.href = url;
-      link.setAttribute("download", "generated_video.mp4");
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    } catch (error) {
-      console.error("Error downloading video:", error);
-    }
+  const handleDownload = () => {
+    if (!videoUrl) return;
+    
+    const link = document.createElement("a");
+    link.href = videoUrl;
+    link.setAttribute("download", "generated_video.mp4");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   return (
     <div className="dashboard-container">
-      <header className="dashboard-header">ReelMaker</header>
+      {/* Header */}
+      <header className="dashboard-header">
+        <div className="logo">ReelMaker</div>
+        <div className="header-right">
+          <a href="/payment" className="nav-link">Pricing</a>
+          <a href="#profile" className="nav-link">Profile</a>
+        </div>
+      </header>
+
+      {/* Main Content */}
       <main className="dashboard-main">
-        <textarea
-          className="prompt-input"
-          placeholder="Enter your idea here..."
-          value={prompt}
-          onChange={(e) => setPrompt(e.target.value)}
-        />
-        <button className="generate-btn" onClick={handleGenerate}>
-          Generate Video
-        </button>
-        {loading && <p className="loading-message">Generating your video...</p>}
-        {videoUrl && (
-          <div className="video-section">
-            <video className="generated-video" src={videoUrl} controls />
-            <button className="download-btn" onClick={handleDownload}>
-              Download Video
-            </button>
-          </div>
-        )}
+        {/* Prompt Input Area */}
+        <div className={`prompt-container ${isPromptMinimized ? "minimized" : ""}`}>
+          <textarea
+            className="prompt-input"
+            placeholder="Enter your idea here..."
+            value={prompt}
+            onChange={(e) => setPrompt(e.target.value)}
+          />
+          <button className="generate-btn" onClick={handleGenerate}>
+            {loading ? "Generating..." : "Generate Video"}
+          </button>
+        </div>
+
+        {/* Video Section */}
+        <div className="video-section">
+          {loading && (
+            <div className="loading-overlay">
+              <p className="loading-message">Generating your video...</p>
+            </div>
+          )}
+          {videoUrl && (
+            <>
+              <video className="generated-video" src={videoUrl} controls />
+              <button className="download-btn" onClick={handleDownload}>
+                Download Video
+              </button>
+            </>
+          )}
+        </div>
       </main>
-      <footer className="dashboard-footer">© 2025 ReelMaker. AI-Powered Video Creation.</footer>
     </div>
   );
 }

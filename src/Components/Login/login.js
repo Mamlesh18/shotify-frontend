@@ -1,109 +1,103 @@
-// Login.js
-import React, { useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import { NavLink } from 'react-router-dom';
-import { Chrome } from 'lucide-react';
-import './login-style.css';
-import chatterpy_logo from '../../Assets/logo.png';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./login-style.css";
 
-
-const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+export default function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isEmailEntered, setIsEmailEntered] = useState(false);
   const navigate = useNavigate();
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.post('http://localhost:5000/v1/auth/login', { email, password });
-      if (response.status === 200) {
-        alert('Login successful');
-        localStorage.setItem('token', response.data.token);
-        localStorage.setItem('email', email); 
+  const handleContinue = () => {
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      alert("Please enter a valid email address.");
+      return;
+    }
+    setIsEmailEntered(true); // Show password field
+  };
 
-        navigate('/');
-      } else {
-        alert('Invalid email or password');
-      }
-    } catch (error) {
-      console.error('Error during login:', error);
-      alert('Login failed');
+  const handleLogin = () => {
+    if (!password) {
+      alert("Please enter your password.");
+      return;
     }
   };
 
+  const handleGoogleAuth = () => {
+    // Perform Google authentication logic here
+    console.log("Google Auth clicked");
+  };
+
+  const handleSignUp = () => {
+    navigate("/signup"); // Redirect to signup page
+  };
+
   return (
-    <>
-      <div className="min-h-screen bg-[#181818] flex flex-col items-center justify-center">
-        <form className="bg-white shadow-md rounded-lg px-8 pt-6 pb-8 mb-4 w-[35%]" onSubmit={handleLogin}>
-          <h2 className="text-2xl font-bold mb-4 text-center text-[#6a0dad]">Login to ChatterPy.ai</h2>
-          <p className="text-center text-gray-500">Enter Your credentials to access your account</p>
-          <br />
-          <img src={chatterpy_logo} alt="ChatterPy Logo" className="mx-auto w-[80px] md:w-[80px] lg:w-[80px] h-auto" />
-          <div className="mb-2">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
-              Email:
-            </label>
+    <div className="login-container">
+      {/* Left Section - Login Details */}
+      <div className="login-section">
+        <div className="logo">ReelMaker</div>
+        <h1 className="welcome-message">Welcome Back!</h1>
+
+        {/* Email Input */}
+        <div className="input-group">
+          <input
+            type="email"
+            placeholder="Enter your email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="input-field"
+          />
+          {!isEmailEntered ? (
+            <button onClick={handleContinue} className="continue-btn" disabled={!email}>
+              Continue
+            </button>
+          ) : null}
+        </div>
+
+        {/* Password Input (Appears after entering email) */}
+        {isEmailEntered && (
+          <div className="input-group fade-in">
             <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="email"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email"
-              required
-            />
-          </div>
-          <div className="mb-6">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
-              Password:
-            </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="password"
               type="password"
+              placeholder="Enter your password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter your password"
-              required
+              className="input-field"
             />
-          </div>
-          <div className="flex items-center justify-between mb-6">
-            <label className="block text-gray-700 text-sm font-bold">
-              <input className="mr-2 leading-tight" type="checkbox" />
-              Remember me
-            </label>
-            <a className="inline-block align-baseline text-sm text-[#6a0dad] hover:text-[#6a0dadac]" href="#">
-              Forgot password?
-            </a>
-          </div>
-          <div className="flex items-center justify-between mb-6">
-            <button
-              className="bg-[#6a0dad] w-full hover:bg-[#6a0dadac] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              type="submit"
-            >
-              Sign in
+            <button onClick={handleLogin} className="login-btn" disabled={!password}>
+              Log In
             </button>
           </div>
-          <div className="flex items-center justify-center mb-1">
-            <p className="px-4 text-center text-gray-500">Or continue with</p>
-          </div>
-          <div className="flex items-center justify-between mb-2">
-            <button
-              className="bg-gray-400 w-full text-gray-700 font-bold focus:shadow-outline hover:bg-gray-300 flex items-center justify-center"
-              type="button"
-            >
-              <Chrome className="w-5 h-9 mr-2" />
-              Sign in with Google
-            </button>
-          </div>
-          <p className="text-center text-gray-600 text-sm mt-6">
-            Don't have an account? <NavLink className="text-[#6a0dad] hover:text-[#6a0dadac]" to="/signup">Sign up</NavLink>
-          </p>
-        </form>
-      </div>
-    </>
-  );
-};
+        )}
 
-export default Login;
+        {/* OR Divider */}
+        <div className="or-divider">
+          <span>OR</span>
+        </div>
+
+        {/* Google Authentication Button */}
+        <button onClick={handleGoogleAuth} className="google-auth-btn">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" 
+               alt="Google Logo" 
+               className="google-logo" 
+          />
+          Continue with Google
+        </button>
+
+        {/* Sign Up Option */}
+        <p className="signup-option">
+          Don't have an account? <span onClick={handleSignUp}>Sign Up</span>
+        </p>
+      </div>
+
+      {/* Right Section - Product Information */}
+      <div className="product-section">
+        <h2 className="product-title">Revolutionizing Content Creation</h2>
+        <p className="product-description">
+          Generate YouTube Shorts & Instagram Reels in under 60 seconds! Just enter a one-line idea, and let AI craft a visually stunning masterpiece.
+        </p>
+      </div>
+    </div>
+  );
+}

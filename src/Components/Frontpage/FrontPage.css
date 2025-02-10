@@ -133,7 +133,7 @@
 }
 
 /* Login Button */
-.login-btn {
+.login-btn-1 {
   padding: 0.8rem 1.8rem;
   font-size: 1.1rem;
   font-weight: bold;
@@ -146,7 +146,7 @@
   cursor: pointer;
 }
 
-.login-btn:hover {
+.login-btn-1:hover {
   background: linear-gradient(45deg, #9333ea, #a855f7);
   transform: scale(1.05);
 }
