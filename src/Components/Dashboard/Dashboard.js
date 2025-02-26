@@ -17,7 +17,7 @@ export default function Dashboard() {
         { prompt },
         {
           headers: {
-            Email: "mamlesh123@gmail.com",
+            Email: "hey@gmail.com",
           },
           responseType: "blob", // Expect a video file
         }
@@ -49,6 +49,10 @@ export default function Dashboard() {
       {/* Header */}
       <header className="dashboard-header">
         <div className="logo">ReelMaker</div>
+        <div className="navbar">
+        <p>Backend is currently on progress</p>
+    
+        </div>
         <div className="header-right">
           <a href="/payment" className="nav-link">Pricing</a>
           <a href="#profile" className="nav-link">Profile</a>

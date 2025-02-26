@@ -19,7 +19,7 @@ export default function Frontpage() {
       <header className="frontpage-header">
         <div className="logo">ReelMaker</div>
         <div className="navbar">
-          <a href="/about">About Us</a>
+        <p>Backend is currently on progress</p>
     
         </div>
         <motion.button
